@@ -17,12 +17,6 @@ module Blot
         end
       end
 
-      def wrapper(options={}, &block)
-        content_tag :td, options do
-          optional_content(options) { yield if block_given? }
-        end
-      end
-
       def columns(width, options={})
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
@@ -32,6 +26,12 @@ module Blot
         end
       end
       alias :column :columns
+
+      def wrapper(options={}, &block)
+        content_tag :td, options do
+          optional_content(options) { yield if block_given? }
+        end
+      end
 
       private
 
