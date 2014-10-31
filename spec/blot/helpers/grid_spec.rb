@@ -4,7 +4,7 @@ describe Blot::Helpers::Grid do
   let(:view) { ActionView::Base.new.extend subject }
 
   describe '.container' do
-    it 'can render an empty container' do
+    it 'can render a container' do
       expect(view.container).to eql <<-HTML.compress
         <table class="container">
           <tr>
@@ -13,39 +13,35 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+  end
 
-    it 'can render an empty centered container' do
-      expect(view.container(class: 'center')).to eql <<-HTML.compress
-        <table class="container">
-          <tr>
-            <td class="center">
-              <center></center>
-            </td>
-          </tr>
-        </table>
-      HTML
-    end
-
-    it 'can render a centered tag with content' do
-      expect(view.container(class: 'center') { " Content " }).to eql <<-HTML.compress
-        <table class="container">
-          <tr>
-            <td class="center">
-              <center>
-                Content
-              </center>
-            </td>
-          </tr>
+  describe '.row' do
+    it 'can render a row' do
+      expect(view.row).to eql <<-HTML.compress
+        <table class="row">
+          <tr></tr>
         </table>
       HTML
     end
   end
 
-  describe '.row' do
-    it 'can render an empty row' do
-      expect(view.row).to eql <<-HTML.compress
-        <table class="row">
-          <tr></tr>
+  describe '.columns' do
+    it 'can render one column' do
+      expect(view.column :one).to eql <<-HTML.compress
+        <table class="one columns">
+          <tr>
+            <td class="expander"></td>
+          </tr>
+        </table>
+      HTML
+    end
+
+    it 'can render multiple columns' do
+      expect(view.columns :two).to eql <<-HTML.compress
+        <table class="two columns">
+          <tr>
+            <td class="expander"></td>
+          </tr>
         </table>
       HTML
     end

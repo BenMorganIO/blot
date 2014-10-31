@@ -21,7 +21,7 @@ module Blot
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
             wrapper(options) { yield if block_given? }
-            content_tag :td, class: 'expander'
+            content_tag :td, nil, class: 'expander'
           end
         end
       end
