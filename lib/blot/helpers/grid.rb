@@ -1,7 +1,7 @@
 module Blot
   module Helpers
     module Grid
-      def container(options={}, &block)
+      def container(options={})
         content_tag :table, class: 'container' do
           content_tag :tr do
             content_tag :td, options do
@@ -11,7 +11,7 @@ module Blot
         end
       end
 
-      def row(&block)
+      def row
         content_tag :table, class: 'row' do
           content_tag :tr do
             yield if block_given?
@@ -29,7 +29,7 @@ module Blot
         end
       end
 
-      def columns(width, options={}, &block)
+      def columns(width, options={})
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
             content_tag :td, options do
