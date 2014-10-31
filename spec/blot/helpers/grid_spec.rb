@@ -52,9 +52,15 @@ describe Blot::Helpers::Grid do
   end
 
   describe '.wrapper' do
-    it 'can render an empty wrapper' do
+    it 'can be empty' do
       expect(view.wrapper).to eql <<-HTML.compress
         <td></td>
+      HTML
+    end
+
+    it 'can yield content' do
+      expect(view.wrapper { "Content" }).to eql <<-HTML.compress
+        <td>Content</td>
       HTML
     end
   end
