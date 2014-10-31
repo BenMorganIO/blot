@@ -19,11 +19,7 @@ module Blot
 
       def wrapper(options={}, &block)
         content_tag :td, options do
-          if block_given?
-
-            options[:class] == 'center' ? content_tag(:center, yield) : yield
-
-          end
+          optional_content(options) { yield if block_given? }
         end
       end
 
@@ -36,6 +32,16 @@ module Blot
         end
       end
       alias :column :columns
+
+      private
+
+      def optional_content(options={}, &block)
+        if options[:class] == 'center'
+          content_tag :center, block.call
+        else
+          block.call
+        end
+      end
     end
   end
 end
