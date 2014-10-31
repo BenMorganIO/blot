@@ -65,6 +65,14 @@ describe Blot::Helpers::Grid do
     end
   end
 
-  describe '.columns' do
+  context 'private' do
+    describe '.optional_content' do
+      it 'can center content' do
+        oc = view.send(:optional_content, class: 'center') { "Content" }
+        expect(oc).to eql <<-HTML.compress
+          <center>Content</center>
+        HTML
+      end
+    end
   end
 end
