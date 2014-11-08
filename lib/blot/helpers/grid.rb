@@ -36,7 +36,7 @@ module Blot
       private
 
       def optional_content(options={}, &block)
-        if options[:class] == 'center'
+        if options[:class] && options[:class].split(' ').include?('center')
           content_tag :center, block.call
         else
           block.call
