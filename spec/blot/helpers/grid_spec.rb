@@ -5,6 +5,24 @@ include ActionView::Helpers::AssetTagHelper
 describe Blot::Helpers::Grid do
   let(:view) { ActionView::Base.new.extend subject }
 
+  describe '.block_grid' do
+    it 'can render a block-grid' do
+      expect(view.block_grid up: :two).to eql <<-HTML.compress
+        <table class="block-grid two-up">
+          <tr></tr>
+        </table>
+      HTML
+    end
+
+    it 'can render a block-grid with classes' do
+      expect(view.block_grid up: :two, class: 'row').to eql <<-HTML.compress
+        <table class="block-grid two-up row">
+          <tr></tr>
+        </table>
+      HTML
+    end
+  end
+
   describe '.container' do
     it 'can render a container' do
       expect(view.container).to eql <<-HTML.compress
