@@ -59,6 +59,18 @@ describe Blot::Helpers::Grid do
         <td>Content</td>
       HTML
     end
+
+    it 'can have a class' do
+      expect(view.wrapper(class: 'wrapper') { 'Content' }).to eql <<-HTML.compress
+        <td class="wrapper">Content</td>
+      HTML
+    end
+
+    it 'can have multiple classes' do
+      expect(view.wrapper(class: 'wrapper last') { 'Content' }).to eql <<-HTML.compress
+        <td class="wrapper last">Content</td>
+      HTML
+    end
   end
 
   context 'private' do
