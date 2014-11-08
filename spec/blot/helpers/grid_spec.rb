@@ -141,7 +141,7 @@ describe Blot::Helpers::Grid do
     end
   end
 
-  context 'battlefield' do
+  context 'example' do
     it 'can render two rows, twelve and six by six' do
       example = view.container do
         view.row do
