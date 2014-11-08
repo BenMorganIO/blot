@@ -501,13 +501,13 @@ button 'Button Label', '#', size: :button
 ```
 
 ```html
-        <table class="button">
-          <tr>
-            <td>
-              <a href="#">Button Label</a>
-            </td>
-          </tr>
-        </table>
+<table class="button">
+  <tr>
+    <td>
+      <a href="#">Button Label</a>
+    </td>
+  </tr>
+</table>
 ```
 
 #### Tiny Button
