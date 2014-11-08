@@ -60,6 +60,20 @@ describe Blot::Helpers::Grid do
     end
   end
 
+  describe '.sub_columns' do
+    it 'can render a sub-column' do
+      expect(view.sub_column :one).to eql <<-HTML.compress
+        <td class="one sub-columns"></td>
+      HTML
+    end
+
+    it 'can render multiple sub-columns' do
+      expect(view.sub_columns :two).to eql <<-HTML.compress
+        <td class="two sub-columns"></td>
+      HTML
+    end
+  end
+
   describe '.wrapper' do
     it 'can be empty' do
       expect(view.wrapper).to eql <<-HTML.compress
@@ -317,6 +331,48 @@ describe Blot::Helpers::Grid do
                 </table>
 
               </center>
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
+
+    it 'can render a sub-grid' do
+      example = view.row do
+        view.wrapper(class: 'wrapper') do
+          view.columns(:eight, sub_columns: true) do
+            view.sub_columns(:eight) { '.eight.sub-columns' } +
+            view.sub_columns(:four, class: 'last') { '.four.sub-columns' }
+          end
+        end +
+        view.wrapper(class: 'wrapper last') do
+          view.columns(:four) { '.four.columns' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td class="wrapper">
+
+              <table class="eight columns">
+                <tr>
+                  <td class="eight sub-columns">.eight.sub-columns</td>
+                  <td class="four sub-columns last">.four.sub-columns</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="wrapper last">
+
+              <table class="four columns">
+                <tr>
+                  <td>.four.columns</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
             </td>
           </tr>
         </table>

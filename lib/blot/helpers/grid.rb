@@ -20,12 +20,22 @@ module Blot
       def columns(width, options={})
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
-            "#{wrapper(options) { yield if block_given? } if !options.empty? || block_given? }" \
+            if options[:sub_columns]
+              "#{yield if block_given?}".html_safe
+            else
+              "#{wrapper(options) { yield if block_given? } if !options.empty? || block_given? }".html_safe
+            end +
             "#{content_tag :td, nil, class: 'expander'}".html_safe
           end
         end
       end
       alias :column :columns
+
+      def sub_columns(width, options={})
+        options[:class] = "#{width} sub-columns #{options[:class]}".strip
+        wrapper(options) { yield if block_given? }
+      end
+      alias :sub_column :sub_columns
 
       def wrapper(options={}, &block)
         content_tag :td, options do
