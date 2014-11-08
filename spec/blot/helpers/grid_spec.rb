@@ -45,6 +45,17 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+
+    it 'can have text-padding' do
+      expect(view.columns(:four, class: 'right-text-pad')).to eql <<-HTML.compress
+        <table class="four columns">
+          <tr>
+            <td class="right-text-pad"></td>
+            <td class="expander"></td>
+          </tr>
+        </table>
+      HTML
+    end
   end
 
   describe '.wrapper' do

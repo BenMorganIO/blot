@@ -20,8 +20,8 @@ module Blot
       def columns(width, options={})
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
-            wrapper(options) { yield if block_given? }
-            content_tag :td, nil, class: 'expander'
+            "#{wrapper(options) { yield if block_given? } if !options.empty? || block_given? }" \
+            "#{content_tag :td, nil, class: 'expander'}".html_safe
           end
         end
       end
