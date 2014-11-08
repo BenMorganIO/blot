@@ -378,5 +378,31 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+
+    it 'can render a block-grid' do
+      example = view.container do
+        view.block_grid(up: :two) do
+          view.wrapper { 'Column #1' } +
+          view.wrapper { 'Column #2' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="block-grid two-up">
+                <tr>
+                  <td>Column #1</td>
+                  <td>Column #2</td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
   end
 end

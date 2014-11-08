@@ -1,6 +1,15 @@
 module Blot
   module Helpers
     module Grid
+      def block_grid(options={})
+        options[:class] = "block-grid #{options[:up]}-up #{options[:class]}".strip
+        content_tag :table, class: options[:class] do
+          content_tag :tr do
+            yield if block_given?
+          end
+        end
+      end
+
       def container(options={})
         content_tag :table, class: 'container' do
           content_tag :tr do
