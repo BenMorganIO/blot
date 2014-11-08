@@ -94,4 +94,74 @@ describe Blot::Helpers::Grid do
       end
     end
   end
+
+  context 'battlefield' do
+    it 'can render two rows, twelve and six by six' do
+      example = view.container do
+        view.row do
+          view.wrapper(class: 'wrapper last') do
+            view.columns(:twelve, class: 'panel') { '.twelve.columns' }
+          end
+        end +
+        view.row do
+          view.wrapper(class: 'wrapper') do
+            view.columns(:six, class: 'panel') { '.six.columns' }
+          end +
+          view.wrapper(class: 'wrapper last') do
+            view.columns(:six, class: 'panel') { '.six.columns' }
+          end
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="wrapper last">
+
+                    <table class="twelve columns">
+                      <tr>
+                        <td class="panel">.twelve.columns</td>
+                        <td class="expander"></td>
+                      </tr>
+                    </table>
+
+                  </td>
+                </tr>
+              </table>
+
+              <table class="row">
+                <tr>
+                  <td class="wrapper">
+
+                    <table class="six columns">
+                      <tr>
+                        <td class="panel">.six.columns</td>
+                        <td class="expander"></td>
+                      </tr>
+                    </table>
+
+                  </td>
+                  <td class="wrapper last">
+
+                    <table class="six columns">
+                      <tr>
+                        <td class="panel">.six.columns</td>
+                        <td class="expander"></td>
+                      </tr>
+                    </table>
+
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
+  end
 end
