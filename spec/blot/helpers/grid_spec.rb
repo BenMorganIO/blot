@@ -209,5 +209,30 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+
+    it 'can render offset columns' do
+      example = view.row do
+        view.wrapper(class: 'wrapper offset-by-four') do
+          view.columns(:eight, class: 'panel') { 'Offset Content' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td class="wrapper offset-by-four">
+            
+              <table class="eight columns">
+                <tr>
+                  <td class="panel">Offset Content</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
   end
 end
