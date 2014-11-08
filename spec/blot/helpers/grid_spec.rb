@@ -45,6 +45,18 @@ describe Blot::Helpers::Grid do
     end
   end
 
+  describe '.panel_sub_grid' do
+    it 'can render a panel sub-grid' do
+      expect(view.panel_sub_grid).to eql <<-HTML.compress
+        <td class="panel sub-grid">
+          <table>
+            <tr></tr>
+          </table>
+        </td>
+      HTML
+    end
+  end
+
   describe '.columns' do
     it 'can render one column' do
       expect(view.column :one).to eql <<-HTML.compress
@@ -418,6 +430,71 @@ describe Blot::Helpers::Grid do
               </table>
 
             </td>
+          </tr>
+        </table>
+      HTML
+    end
+
+    it 'can render a sidebar' do
+      example = view.row do
+        view.wrapper(class: 'wrapper') do
+          view.columns(:eight) { 'Main content' }
+        end +
+        view.wrapper(class: 'wrapper last') do
+          view.columns(:four, class: 'panel') { 'Panel content' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td class="wrapper">
+
+              <table class="eight columns">
+                <tr>
+                  <td>Main content</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="wrapper last">
+
+              <table class="four columns">
+                <tr>
+                  <td class="panel">Panel content</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
+
+    it 'can render a panel with a sub-grid' do
+      example = view.columns(:twelve, class: 'panel sub-grid', sub_columns: true) do
+        view.panel_sub_grid do
+          view.sub_columns(:six) { 'Left Sub-Column' } +
+          view.sub_columns(:six) { 'Right Sub-Column' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="twelve columns">
+          <tr>
+            <td class="panel sub-grid">
+
+              <table>
+                <tr>
+                  <td class="six sub-columns">Left Sub-Column</td>
+                  <td class="six sub-columns">Right Sub-Column</td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="expander"></td>
           </tr>
         </table>
       HTML

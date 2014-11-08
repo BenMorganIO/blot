@@ -26,6 +26,16 @@ module Blot
         end
       end
 
+      def panel_sub_grid
+        content_tag :td, class: 'panel sub-grid' do
+          content_tag :table do
+            content_tag :tr do
+              yield if block_given?
+            end
+          end
+        end
+      end
+
       def columns(width, options={})
         content_tag :table, class: "#{width} columns" do
           content_tag :tr do
