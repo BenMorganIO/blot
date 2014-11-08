@@ -234,5 +234,56 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+
+    it 'can render text-padding' do
+      example = view.row do
+        view.wrapper(class: 'wrapper') do
+          view.columns(:four, class: 'left-text-pad') { 'Text' }
+        end +
+        view.wrapper(class: 'wrapper') do
+          view.columns(:four) { 'Text' }
+        end +
+        view.wrapper(class: 'wrapper last') do
+          view.columns(:four, class: 'right-text-pad') { 'Text' }
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td class="wrapper">
+
+              <table class="four columns">
+                <tr>
+                  <td class="left-text-pad">Text</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="wrapper">
+
+              <table class="four columns">
+                <tr>
+                  <td>Text</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="wrapper last">
+
+              <table class="four columns">
+                <tr>
+                  <td class="right-text-pad">Text</td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
   end
 end
