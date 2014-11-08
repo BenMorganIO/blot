@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+include ActionView::Helpers::AssetTagHelper
+
 describe Blot::Helpers::Grid do
   let(:view) { ActionView::Base.new.extend subject }
 
@@ -155,6 +157,50 @@ describe Blot::Helpers::Grid do
                     </table>
 
                   </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
+
+    it 'can render centered content' do
+      example = view.row do
+        view.wrapper(class: 'wrapper') do
+          view.columns(:six, class: 'center panel') { 'Centered content' }
+        end +
+        view.wrapper(class: 'wrapper last') do
+          view.columns(:six, class: 'center panel') do
+            image_tag 'http://placehold.it/125x125&text=Centered%20Image', class: 'center', alt: 'centered image'
+          end
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td class="wrapper">
+
+              <table class="six columns">
+                <tr>
+                  <td class="center panel">
+                    <center>Centered content</center>
+                  </td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+            <td class="wrapper last">
+
+              <table class="six columns">
+                <tr>
+                  <td class="center panel">
+                    <center><img alt="centered image" class="center" src="http://placehold.it/125x125&amp;text=Centered%20Image" /></center>
+                  </td>
+                  <td class="expander"></td>
                 </tr>
               </table>
 
