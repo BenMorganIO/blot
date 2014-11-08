@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ### Grid
 
-The grid in Blot matches Ink very very well. It is able to product rows, sub-grids, columns, block-grids, and panels. Here's some examples to learn from:
+The grid in Blot matches Ink very well. It is able to produce rows, sub-grids, columns, block-grids, and panels. Here's some examples to learn from:
 
 #### Rendering Two Rows: Twelve and Six by Six
 
