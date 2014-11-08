@@ -285,5 +285,42 @@ describe Blot::Helpers::Grid do
         </table>
       HTML
     end
+
+    it 'can render full-width rows' do
+      example = view.row do
+        view.wrapper(class: 'center', align: 'center') do
+          view.container(class: 'wrapper last') do
+            view.columns(:twelve) { 'Content' }
+          end
+        end
+      end
+
+      expect(example).to eql <<-HTML.compress
+        <table class="row">
+          <tr>
+            <td align="center" class="center">
+              <center>
+
+                <table class="container">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>Content</td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+              </center>
+            </td>
+          </tr>
+        </table>
+      HTML
+    end
   end
 end
