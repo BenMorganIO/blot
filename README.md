@@ -19,6 +19,75 @@ Or install it yourself as:
 
 ## Usage
 
+### Layout
+
+The layout is used to set up a boilerplate for you. Styles can be added to the header to make even more powerful.
+
+#### Boilerplate Layout
+
+This is the simpliest layout that you can create. Notice that it has no styles inside of it. Its just a raw boilerplate for you to work with.
+
+```ruby
+layout { '<!-- Email Content -->' }
+```
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="width=device-width" name="viewport" />
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td align="center" class="center" valign="top">
+          <center>
+
+          <!-- Email Content -->
+
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+```
+
+#### Styled Layout
+
+Most developers want to style their emails. The `ink` option is used to specify where your `ink.css` file is located. This is usually in the vendor folder, but Rails will search for it for you. The `styles` option is used for you identify the custom styles that you use to modify Ink.
+
+```ruby
+layout(ink: 'ink.css', styles: ['typography.css', 'colors.css'])
+```
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="width=device-width" name="viewport" />
+    <style rel="text/css">
+      Ink Styles!
+    </style>
+    <style rel="text/css">
+      Typography Styles!
+      Color Styles!
+    </style>
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td align="center" class="center" valign="top">
+          <center></center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+```
+
 ### Grid
 
 The grid in Blot matches Ink very well. It is able to produce rows, sub-grids, columns, block-grids, and panels. Here's some examples to learn from:
