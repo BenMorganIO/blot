@@ -1,0 +1,33 @@
+module Blot
+  module Helpers
+    module Layout
+      def layout
+        doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+        html = content_tag :html, xmlns: 'http://www.w3.org/1999/xhtml' do
+          head = content_tag :head do
+            content_type = tag :meta, 'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'
+            viewport     = tag :meta, name: 'viewport', content: 'width=device-width'
+
+            [content_type, viewport].join.html_safe
+          end
+
+          body = content_tag :body do
+            content_tag :table, class: 'body' do
+              content_tag :tr do
+                content_tag :td, class: 'center', align: 'center', valign: 'top' do
+                  content_tag :center do
+                    yield.html_safe if block_given?
+                  end
+                end
+              end
+            end
+          end
+
+          [head, body].join.html_safe
+        end
+
+        [doctype, html].join
+      end
+    end
+  end
+end
