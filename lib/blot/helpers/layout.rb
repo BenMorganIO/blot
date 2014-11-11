@@ -26,7 +26,7 @@ module Blot
               content_tag :tr do
                 content_tag :td, class: 'center', align: 'center', valign: 'top' do
                   content_tag :center do
-                    yield.html_safe if block_given?
+                    yield.try(:html_safe) if block_given?
                   end
                 end
               end

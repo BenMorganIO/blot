@@ -30,6 +30,10 @@ describe Blot::Helpers::Layout do
     HTML
   end
 
+  it 'can work with nil content' do
+    expect { view.layout { } }.not_to raise_error
+  end
+
   it 'can render styles' do
     assets = { assets: { 'ink.css' => 'Ink Styles!', 'typography.css' => 'Typography Styles!', 'colors.css' => 'Color Styles!' } }
     allow(Rails).to receive_messages(application:  OpenStruct.new(assets))
