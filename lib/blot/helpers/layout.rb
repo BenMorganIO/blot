@@ -36,7 +36,7 @@ module Blot
           [head, body].join.html_safe
         end
 
-        [doctype, html].join
+        [doctype, html].join.html_safe
       end
     end
   end
