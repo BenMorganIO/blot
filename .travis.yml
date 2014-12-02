@@ -5,3 +5,4 @@ rvm:
   - 2.1.5
   - ruby-head
   - jruby-head
+script: bundle exec rspec spec -w -f documentation
