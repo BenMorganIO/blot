@@ -97,15 +97,15 @@ The grid in Blot matches Ink very well. It is able to produce rows, sub-grids, c
 ```ruby
 container do
   row do
-    wrapper(class: 'wrapper last') do
+    wrapper(class: 'last') do
       columns(:twelve, class: 'panel') { '.twelve.columns' }
     end
   end
   row do
-    wrapper(class: 'wrapper') do
+    wrapper do
       columns(:six, class: 'panel') { '.six.columns' }
     end
-    wrapper(class: 'wrapper last') do
+    wrapper(class: 'last') do
       columns(:six, class: 'panel') { '.six.columns' }
     end
   end
@@ -166,10 +166,34 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'wrapper') do
+  center do
+    'Content'
+  end
+end
+```
+
+```html
+<table class="row">
+  <tr>
+    <td align="center" class="center">
+      <center>
+
+        Content
+
+      </center>
+    </td>
+  </tr>
+</table>
+```
+
+#### Render Centered Content from Columns
+
+```ruby
+row do
+  wrapper do
     columns(:six, class: 'center panel') { 'Centered content' }
   end
-  wrapper(class: 'wrapper last') do
+  wrapper(class: 'last') do
     columns(:six, class: 'center panel') do
       image_tag 'http://placehold.it/125x125&text=Centered%20Image', class: 'center', alt: 'centered image'
     end
@@ -212,7 +236,7 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'wrapper offset-by-four') do
+  wrapper(class: 'offset-by-four') do
     columns(:eight, class: 'panel') { 'Offset Content' }
   end
 end
@@ -239,13 +263,13 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'wrapper') do
+  wrapper do
     columns(:four, class: 'left-text-pad') { 'Text' }
   end
-  wrapper(class: 'wrapper') do
+  wrapper do
     columns(:four) { 'Text' }
   end
-  wrapper(class: 'wrapper last') do
+  wrapper(class: 'last') do
     columns(:four, class: 'right-text-pad') { 'Text' }
   end
 end
@@ -292,7 +316,7 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'center', align: 'center') do
+  center do
     container(class: 'wrapper last') do
       columns(:twelve) { 'Content' }
     end
@@ -331,13 +355,13 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'wrapper') do
+  wrapper do
     columns(:eight, sub_columns: true) do
       sub_columns(:eight) { '.eight.sub-columns' } +
       sub_columns(:four, class: 'last') { '.four.sub-columns' }
     end
   end
-  wrapper(class: 'wrapper last') do
+  wrapper(class: 'last') do
     columns(:four) { '.four.columns' }
   end
 end
@@ -376,8 +400,8 @@ end
 ```ruby
 container do
   block_grid(up: :two) do
-    wrapper { 'Column #1' }
-    wrapper { 'Column #2' }
+    content_tag(:td) { 'Column #1' }
+    content_tag(:td) { 'Column #2' }
   end
 end
 ```
@@ -403,10 +427,10 @@ end
 
 ```ruby
 row do
-  wrapper(class: 'wrapper') do
+  wrapper do
     columns(:eight) { 'Main content' }
   end
-  wrapper(class: 'wrapper last') do
+  wrapper(class: 'last') do
     columns(:four, class: 'panel') { 'Panel content' }
   end
 end
@@ -506,7 +530,7 @@ hide_for_small
 
 ```ruby
 row do
-  wrapper(class: 'wrapper last') do
+  wrapper(class: 'last') do
     show_for_small do
       columns(:twelve, class: 'panel') { '.show-for-small' }
     end
