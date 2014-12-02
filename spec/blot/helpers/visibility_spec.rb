@@ -30,7 +30,7 @@ describe Blot::Helpers::Visibility do
   context 'example' do
     it 'can render visibility of columns in a row' do
       example = view.row do
-        view.wrapper(class: 'wrapper last') do
+        view.wrapper(class: 'last') do
           view.show_for_small do
             view.columns(:twelve, class: 'panel') { '.show-for-small' }
           end +

@@ -118,13 +118,13 @@ describe Blot::Helpers::Grid do
     end
 
     it 'can have a class' do
-      expect(view.wrapper(class: 'wrapper') { 'Content' }).to eql <<-HTML.compress
-        <td class="wrapper">Content</td>
+      expect(view.wrapper(class: 'last') { 'Content' }).to eql <<-HTML.compress
+        <td class="wrapper last">Content</td>
       HTML
     end
 
     it 'can have multiple classes' do
-      expect(view.wrapper(class: 'wrapper last') { 'Content' }).to eql <<-HTML.compress
+      expect(view.wrapper(class: 'my-wrapper last') { 'Content' }).to eql <<-HTML.compress
         <td class="wrapper last">Content</td>
       HTML
     end
@@ -145,15 +145,15 @@ describe Blot::Helpers::Grid do
     it 'can render two rows, twelve and six by six' do
       example = view.container do
         view.row do
-          view.wrapper(class: 'wrapper last') do
+          view.wrapper(class: 'last') do
             view.columns(:twelve, class: 'panel') { '.twelve.columns' }
           end
         end +
         view.row do
-          view.wrapper(class: 'wrapper') do
+          view.wrapper do
             view.columns(:six, class: 'panel') { '.six.columns' }
           end +
-          view.wrapper(class: 'wrapper last') do
+          view.wrapper(class: 'last') do
             view.columns(:six, class: 'panel') { '.six.columns' }
           end
         end
@@ -212,10 +212,10 @@ describe Blot::Helpers::Grid do
 
     it 'can render centered content' do
       example = view.row do
-        view.wrapper(class: 'wrapper') do
+        view.wrapper do
           view.columns(:six, class: 'center panel') { 'Centered content' }
         end +
-        view.wrapper(class: 'wrapper last') do
+        view.wrapper(class: 'last') do
           view.columns(:six, class: 'center panel') do
             image_tag 'http://placehold.it/125x125&text=Centered%20Image', class: 'center', alt: 'centered image'
           end
@@ -256,7 +256,7 @@ describe Blot::Helpers::Grid do
 
     it 'can render offset columns' do
       example = view.row do
-        view.wrapper(class: 'wrapper offset-by-four') do
+        view.wrapper(class: 'offset-by-four last') do
           view.columns(:eight, class: 'panel') { 'Offset Content' }
         end
       end
@@ -264,7 +264,7 @@ describe Blot::Helpers::Grid do
       expect(example).to eql <<-HTML.compress
         <table class="row">
           <tr>
-            <td class="wrapper offset-by-four">
+            <td class="wrapper offset-by-four last">
             
               <table class="eight columns">
                 <tr>
@@ -281,10 +281,10 @@ describe Blot::Helpers::Grid do
 
     it 'can render text-padding' do
       example = view.row do
-        view.wrapper(class: 'wrapper') do
+        view.wrapper do
           view.columns(:four, class: 'left-text-pad') { 'Text' }
         end +
-        view.wrapper(class: 'wrapper') do
+        view.wrapper do
           view.columns(:four) { 'Text' }
         end +
         view.wrapper(class: 'wrapper last') do
@@ -332,7 +332,7 @@ describe Blot::Helpers::Grid do
 
     it 'can render full-width rows' do
       example = view.row do
-        view.wrapper(class: 'center', align: 'center') do
+        view.content_tag(:td, class: 'center', align: 'center') do
           view.container(class: 'wrapper last') do
             view.columns(:twelve) { 'Content' }
           end
@@ -369,13 +369,13 @@ describe Blot::Helpers::Grid do
 
     it 'can render a sub-grid' do
       example = view.row do
-        view.wrapper(class: 'wrapper') do
+        view.wrapper do
           view.columns(:eight, sub_columns: true) do
             view.sub_columns(:eight) { '.eight.sub-columns' } +
             view.sub_columns(:four, class: 'last') { '.four.sub-columns' }
           end
         end +
-        view.wrapper(class: 'wrapper last') do
+        view.wrapper(class: 'last') do
           view.columns(:four) { '.four.columns' }
         end
       end
@@ -437,10 +437,10 @@ describe Blot::Helpers::Grid do
 
     it 'can render a sidebar' do
       example = view.row do
-        view.wrapper(class: 'wrapper') do
+        view.wrapper do
           view.columns(:eight) { 'Main content' }
         end +
-        view.wrapper(class: 'wrapper last') do
+        view.wrapper(class: 'last') do
           view.columns(:four, class: 'panel') { 'Panel content' }
         end
       end
