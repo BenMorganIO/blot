@@ -130,6 +130,28 @@ describe Blot::Helpers::Grid do
     end
   end
 
+  describe '.center' do
+    it 'can be empty' do
+      expect(view.center).to eql <<-HTML.compress
+        <td align="center" class="center">
+          <center></center>
+        </td>
+      HTML
+    end
+
+    it 'can yield centered content' do
+      expect(view.center { 'Content' }).to eql <<-HTML.compress
+        <td align="center" class="center">
+          <center>Content</center>
+        </td>
+      HTML
+    end
+
+    it 'cannot have classes' do
+      expect { view.center(class: 'wrapper') }.to raise_error(ArgumentError)
+    end
+  end
+
   context 'private' do
     describe '.optional_content' do
       it 'can center content' do
