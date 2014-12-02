@@ -1,5 +1,7 @@
 # Blot
 
+[![Build Status](https://travis-ci.org/BenMorganIO/blot.svg?branch=travis)](https://travis-ci.org/BenMorganIO/blot)
+
 Tired of all those tables in those emails?
 Blot is a DSL that lets you create them with ease and optimize with the Ink email framework.
 
