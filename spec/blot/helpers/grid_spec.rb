@@ -105,15 +105,15 @@ describe Blot::Helpers::Grid do
   end
 
   describe '.wrapper' do
-    it 'can be empty' do
-      expect(view.wrapper).to eql <<-HTML.compress
+    it 'can be empty by setting to false' do
+      expect(view.wrapper(wrapper: false)).to eql <<-HTML.compress
         <td></td>
       HTML
     end
 
     it 'can yield content' do
       expect(view.wrapper { "Content" }).to eql <<-HTML.compress
-        <td>Content</td>
+        <td class="wrapper">Content</td>
       HTML
     end
 
@@ -125,7 +125,7 @@ describe Blot::Helpers::Grid do
 
     it 'can have multiple classes' do
       expect(view.wrapper(class: 'my-wrapper last') { 'Content' }).to eql <<-HTML.compress
-        <td class="wrapper last">Content</td>
+        <td class="wrapper my-wrapper last">Content</td>
       HTML
     end
   end
@@ -287,7 +287,7 @@ describe Blot::Helpers::Grid do
         view.wrapper do
           view.columns(:four) { 'Text' }
         end +
-        view.wrapper(class: 'wrapper last') do
+        view.wrapper(class: 'last') do
           view.columns(:four, class: 'right-text-pad') { 'Text' }
         end
       end
@@ -332,7 +332,7 @@ describe Blot::Helpers::Grid do
 
     it 'can render full-width rows' do
       example = view.row do
-        view.content_tag(:td, class: 'center', align: 'center') do
+        view.center do
           view.container(class: 'wrapper last') do
             view.columns(:twelve) { 'Content' }
           end
@@ -412,8 +412,8 @@ describe Blot::Helpers::Grid do
     it 'can render a block-grid' do
       example = view.container do
         view.block_grid(up: :two) do
-          view.wrapper { 'Column #1' } +
-          view.wrapper { 'Column #2' }
+          view.content_tag(:td) { 'Column #1' } +
+          view.content_tag(:td) { 'Column #2' }
         end
       end
 

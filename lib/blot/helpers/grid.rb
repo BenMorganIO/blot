@@ -13,7 +13,9 @@ module Blot
       def container(options={})
         content_tag :table, class: 'container' do
           content_tag :tr do
-            wrapper(options) { yield if block_given? }
+            content_tag :td, options do
+              yield if block_given?
+            end
           end
         end
       end
@@ -42,7 +44,9 @@ module Blot
             content = if options[:sub_columns]
               block_given? ? yield : nil
             elsif !options.empty? || block_given?
-              wrapper(options) { yield if block_given? }
+              content_tag :td, options do
+                optional_content(options) { yield if block_given? }
+              end
             else
               nil
             end
@@ -55,13 +59,26 @@ module Blot
 
       def sub_columns(width, options={})
         options[:class] = "#{width} sub-columns #{options[:class]}".strip
-        wrapper(options) { yield if block_given? }
+        content_tag :td, options do
+          optional_content(options) { yield if block_given? }
+        end
       end
       alias :sub_column :sub_columns
 
       def wrapper(options={}, &block)
+        unless options.delete(:wrapper).is_a?(FalseClass)
+          options[:class] = "wrapper #{options[:class]}".squish
+        end
         content_tag :td, options do
           optional_content(options) { yield if block_given? }
+        end
+      end
+
+      def center(&block)
+        content_tag :td, class: 'center', align: 'center' do
+          content_tag :center do
+            yield if block_given?
+          end
         end
       end
 
