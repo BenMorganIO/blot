@@ -128,6 +128,12 @@ describe Blot::Helpers::Grid do
         <td class="wrapper my-wrapper last">Content</td>
       HTML
     end
+
+    it 'can have wrapper as a class' do
+      expect(view.wrapper(class: 'wrapper')).to eql <<-HTML.compress
+        <td class="wrapper"></td>
+      HTML
+    end
   end
 
   describe '.center' do

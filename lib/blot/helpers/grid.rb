@@ -66,7 +66,7 @@ module Blot
       alias :sub_column :sub_columns
 
       def wrapper(options={}, &block)
-        unless options.delete(:wrapper).is_a?(FalseClass)
+        unless options.delete(:wrapper).is_a?(FalseClass) || options[:class] && options[:class].split(' ').include?('wrapper')
           options[:class] = "wrapper #{options[:class]}".squish
         end
         content_tag :td, options do
