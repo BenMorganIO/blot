@@ -765,6 +765,51 @@ button 'Button Label', '#', size: :button, radius: :round
 </table>
 ```
 
+### Components
+
+Components are used to create portions of the ink framework fast.
+
+#### Section
+
+```ruby
+section
+```
+
+```html
+<table class="row">
+  <tr>
+    <td class="wrapper last"></td>
+  </tr>
+</table>
+```
+
+#### Panel Section
+
+```ruby
+panel_section
+```
+
+```html
+<table class="row">
+  <tr>
+    <td class="wrapper last">
+
+      <table class="twelve columns">
+        <tr>
+          <td class="panel center">
+
+            <center></center>
+
+          </td>
+          <td class="expander"></td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/blot/fork )
