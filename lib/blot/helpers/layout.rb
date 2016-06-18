@@ -21,7 +21,7 @@ module Blot
             end if options[:styles]
 
             ignored_styles = content_tag :style, rel: 'text/css', 'data-premailer' => 'ignore' do
-              <<-CSS.compress
+              <<-CSS.squish
                 /* Resize an element that has a width and height of zero to full size */
                 .showy {
                   height: 100% !important;
