@@ -7,9 +7,11 @@ module Blot
           head = content_tag :head do
             content_type = tag :meta, 'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'
             viewport     = tag :meta, name: 'viewport', content: 'width=device-width'
+
             ink          = content_tag :style, rel: 'text/css' do
               Rails.application.assets[options[:ink]].to_s.html_safe
             end if options[:ink]
+
             styles       = content_tag :style, rel: 'text/css' do
               app_styles = []
               options[:styles].each do |style|
@@ -18,7 +20,22 @@ module Blot
               app_styles.join(' ').html_safe
             end if options[:styles]
 
-            [content_type, viewport, ink, styles].join.html_safe
+            ignored_styles = content_tag :style, rel: 'text/css', 'data-premailer' => 'ignore' do
+              <<-CSS.compress
+                /* Resize an element that has a width and height of zero to full size */
+                .showy {
+                  height: 100% !important;
+                  width: 100% !important;
+                }
+
+                /* Hide this everywhere, except for those that can’t read this code */
+                .no-showy {
+                  display: none;
+                }
+              CSS
+            end
+
+            [content_type, viewport, ink, styles, ignored_styles].join.html_safe
           end
 
           body = content_tag :body do
