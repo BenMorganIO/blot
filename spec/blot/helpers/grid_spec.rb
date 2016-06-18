@@ -139,7 +139,7 @@ describe Blot::Helpers::Grid do
   describe '.center' do
     it 'can be empty' do
       expect(view.center).to eql <<-HTML.compress
-        <td align="center" class="center">
+        <td class="center" align="center">
           <center></center>
         </td>
       HTML
@@ -147,7 +147,7 @@ describe Blot::Helpers::Grid do
 
     it 'can yield centered content' do
       expect(view.center { 'Content' }).to eql <<-HTML.compress
-        <td align="center" class="center">
+        <td class="center" align="center">
           <center>Content</center>
         </td>
       HTML
@@ -270,7 +270,7 @@ describe Blot::Helpers::Grid do
               <table class="six columns">
                 <tr>
                   <td class="center panel">
-                    <center><img alt="centered image" class="center" src="http://placehold.it/125x125&amp;text=Centered%20Image" /></center>
+                    <center><img class="center" alt="centered image" src="http://placehold.it/125x125&amp;text=Centered%20Image" /></center>
                   </td>
                   <td class="expander"></td>
                 </tr>
@@ -293,7 +293,7 @@ describe Blot::Helpers::Grid do
         <table class="row">
           <tr>
             <td class="wrapper offset-by-four last">
-            
+
               <table class="eight columns">
                 <tr>
                   <td class="panel">Offset Content</td>
@@ -370,7 +370,7 @@ describe Blot::Helpers::Grid do
       expect(example).to eql <<-HTML.compress
         <table class="row">
           <tr>
-            <td align="center" class="center">
+            <td class="center" align="center">
               <center>
 
                 <table class="container">
