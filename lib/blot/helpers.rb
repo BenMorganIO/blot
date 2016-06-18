@@ -1,3 +1,4 @@
+require 'blot/helpers/asset'
 require 'blot/helpers/layout'
 require 'blot/helpers/grid'
 require 'blot/helpers/visibility'
@@ -11,5 +12,6 @@ module Blot
     include Visibility
     include Button
     include Components
+    include Asset
   end
 end
